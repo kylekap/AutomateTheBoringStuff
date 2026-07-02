@@ -6,35 +6,35 @@ import time
 cat = ["fat", "gray", "loud"]
 size, color, disposition = cat
 
+def matrix():
+    # Matrix
+    width = 70  # The number of columns
 
-# Matrix
-WIDTH = 70  # The number of columns
+    try:
+        # For each column, when the counter is 0, no stream is shown.
+        # Otherwise, it acts as a counter for how many times a 1 or 0
+        # should be displayed in that column.
+        columns = [0] * width
+        while True:
+            # Loop over each column:
+            for i in range(width):
+                if random.random() < 0.02:  # noqa: PLR2004
+                    # Restart a stream counter on this column.
+                    # The stream length is between 4 and 14 characters long.
+                    columns[i] = random.randint(4, 14)
 
-try:
-    # For each column, when the counter is 0, no stream is shown.
-    # Otherwise, it acts as a counter for how many times a 1 or 0
-    # should be displayed in that column.
-    columns = [0] * WIDTH
-    while True:
-        # Loop over each column:
-        for i in range(WIDTH):
-            if random.random() < 0.02:  # noqa: PLR2004
-                # Restart a stream counter on this column.
-                # The stream length is between 4 and 14 characters long.
-                columns[i] = random.randint(4, 14)
-
-            # Print a character in this column:
-            if columns[i] == 0:
-                # Change this " "" to "." to see the empty spaces:
-                print(" ", end="")
-            else:
-                # Print a 0 or 1:
-                print(random.choice([0, 1]), end="")
-                columns[i] -= 1  # Decrement the counter for this column.
-        print()  # Print a newline at the end of the row of columns.
-        time.sleep(0.1)  # Each row pauses for one tenth of a second.
-except KeyboardInterrupt:
-    sys.exit()  # When Ctrl-C is pressed, end the program.
+                # Print a character in this column:
+                if columns[i] == 0:
+                    # Change this " "" to "." to see the empty spaces:
+                    print(" ", end="")
+                else:
+                    # Print a 0 or 1:
+                    print(random.choice([0, 1]), end="")
+                    columns[i] -= 1  # Decrement the counter for this column.
+            print()  # Print a newline at the end of the row of columns.
+            time.sleep(0.1)  # Each row pauses for one tenth of a second.
+    except KeyboardInterrupt:
+        sys.exit()  # When Ctrl-C is pressed, end the program.
 
 
 """ Practice Questions
@@ -81,3 +81,29 @@ References to values
 copy.deepcopy can be used on lists of lists
 """
 
+def comma_code(li):
+    print_string = ""
+    for ea in li[:-1]:
+        print_string+=ea+", "
+    print_string+="and "+li[-1]
+    return print_string
+
+def coin_flip_streaks(experiments=10_000, streak_len=6):
+    ones = 0
+    zeroes = 0
+    for _ in range(experiments):
+        current_experiment_flip = "".join(str(i) for i in generate_flips(100))
+        if "1"*streak_len in current_experiment_flip:
+            ones+=1
+        if "0"*streak_len in current_experiment_flip:
+            zeroes+=1
+    return zeroes/100, ones/100
+
+def generate_flips(count_of_flips):
+    return [random.randint(0, 1) for _ in range(count_of_flips)]
+
+
+if __name__ == "__main__":
+    """[summary]"""
+    print(comma_code(["apples", "bananas", "tofu", "cats"]))
+    print(coin_flip_streaks(10_000,6))
