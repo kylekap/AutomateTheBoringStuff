@@ -8,8 +8,8 @@
 
 ## Common Commands
 
-To create virtual environment:
->py -m venv env
+To create virtual environment:py -m venv env
+>
 
 To activate
 >env\Scripts\activate

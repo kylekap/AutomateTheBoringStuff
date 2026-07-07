@@ -23,7 +23,7 @@ authors = [
     ]
 classifiers = ['Programming Language :: Python :: 3.13']
 dynamic = ['readme']
-dependencies = ['ruff']
+dependencies = ['ruff','pyperclip']
 
 [tool.setuptools.dynamic]
 readme = {file = ['README.md']}
