@@ -1,8 +1,8 @@
 def collatz(value):
     if value % 2 == 0:
-        new_value = value//2
+        new_value = value // 2
     elif value != 1:
-        new_value = 3*value+1
+        new_value = 3 * value + 1
     else:
         new_value = 1
     print(value)

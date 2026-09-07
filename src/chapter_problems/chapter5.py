@@ -2,6 +2,7 @@ import random
 
 options = ["heads", "tails"]
 
+
 def validate_input(guess=""):
     while guess not in options:
         print("Guess the coin toss! Enter heads or tails:")
