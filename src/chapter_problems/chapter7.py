@@ -1,14 +1,55 @@
 import copy
 import sys
 
-STARTING_PIECES = {"a8": "bR", "b8": "bN", "c8": "bB", "d8": "bQ",
-"e8": "bK", "f8": "bB", "g8": "bN", "h8": "bR", "a7": "bP", "b7": "bP",
-"c7": "bP", "d7": "bP", "e7": "bP", "f7": "bP", "g7": "bP", "h7": "bP",
-"a1": "wR", "b1": "wN", "c1": "wB", "d1": "wQ", "e1": "wK", "f1": "wB",
-"g1": "wN", "h1": "wR", "a2": "wP", "b2": "wP", "c2": "wP", "d2": "wP",
-"e2": "wP", "f2": "wP", "g2": "wP", "h2": "wP"}
+STARTING_PIECES = {
+    "a8": "bR",
+    "b8": "bN",
+    "c8": "bB",
+    "d8": "bQ",
+    "e8": "bK",
+    "f8": "bB",
+    "g8": "bN",
+    "h8": "bR",
+    "a7": "bP",
+    "b7": "bP",
+    "c7": "bP",
+    "d7": "bP",
+    "e7": "bP",
+    "f7": "bP",
+    "g7": "bP",
+    "h7": "bP",
+    "a1": "wR",
+    "b1": "wN",
+    "c1": "wB",
+    "d1": "wQ",
+    "e1": "wK",
+    "f1": "wB",
+    "g1": "wN",
+    "h1": "wR",
+    "a2": "wP",
+    "b2": "wP",
+    "c2": "wP",
+    "d2": "wP",
+    "e2": "wP",
+    "f2": "wP",
+    "g2": "wP",
+    "h2": "wP",
+}
 
-MAX_PIECES = {"bR": 2, "bN": 2, "bB": 2, "bQ": 1, "bK": 1, "bP": 8, "wR": 2, "wN": 2, "wB": 2, "wQ": 1, "wK": 1, "wP": 8}
+MAX_PIECES = {
+    "bR": 2,
+    "bN": 2,
+    "bB": 2,
+    "bQ": 1,
+    "bK": 1,
+    "bP": 8,
+    "wR": 2,
+    "wN": 2,
+    "wB": 2,
+    "wQ": 1,
+    "wK": 1,
+    "wP": 8,
+}
 
 rows = ["1", "2", "3", "4", "5", "6", "7", "8"]
 columns = ["a", "b", "c", "d", "e", "f", "g", "h"]
@@ -45,12 +86,13 @@ BOARD_TEMPLATE = """
 WHITE_SQUARE = "||"
 BLACK_SQUARE = "  "
 
+
 def print_chessboard(board):
     squares = []
     is_white_square = True
     for y in "87654321":
         for x in "abcdefgh":
-            #print(x, y, is_white_square)  # DEBUG: Show coordinates  # noqa: ERA001
+            # print(x, y, is_white_square)  # DEBUG: Show coordinates  # noqa: ERA001
             if x + y in board:
                 squares.append(board[x + y])
             elif is_white_square:
@@ -61,7 +103,6 @@ def print_chessboard(board):
         is_white_square = not is_white_square
 
     print(BOARD_TEMPLATE.format(*squares))
-
 
 
 def main():  # noqa: C901
@@ -98,7 +139,7 @@ def chess_checker(board):
         piece_counts = MAX_PIECES.copy()
         for key, val in board.items():
             if val not in piece_counts:
-                msg = "Invalid piece"+val
+                msg = "Invalid piece" + val
                 _raise_invalid(msg)
             piece_counts[val] -= 1
             if piece_counts[val] < 0:
@@ -110,18 +151,21 @@ def chess_checker(board):
     except ValueError as exc:
         print(exc)
 
+
 def print_inventory(inventory_dict):
     piece_counts = 0
     print("Inventory:")
     for key, value in inventory_dict.items():
         print(f"{value} {key}")
-        piece_counts+=value
+        piece_counts += value
     print(f"Total number of items: {piece_counts}")
+
 
 def add_inventory(original_inventory, added_item_list):
     for item in added_item_list:
-        original_inventory[item] = original_inventory.get(item,0) + 1
+        original_inventory[item] = original_inventory.get(item, 0) + 1
     return original_inventory
+
 
 if __name__ == "__main__":
     """[summary]"""

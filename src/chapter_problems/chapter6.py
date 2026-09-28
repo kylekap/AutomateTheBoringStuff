@@ -6,6 +6,7 @@ import time
 cat = ["fat", "gray", "loud"]
 size, color, disposition = cat
 
+
 def matrix():
     # Matrix
     width = 70  # The number of columns
@@ -81,23 +82,26 @@ References to values
 copy.deepcopy can be used on lists of lists
 """
 
+
 def comma_code(li):
     print_string = ""
     for ea in li[:-1]:
-        print_string+=ea+", "
-    print_string+="and "+li[-1]
+        print_string += ea + ", "
+    print_string += "and " + li[-1]
     return print_string
+
 
 def coin_flip_streaks(experiments=10_000, streak_len=6):
     ones = 0
     zeroes = 0
     for _ in range(experiments):
         current_experiment_flip = "".join(str(i) for i in generate_flips(100))
-        if "1"*streak_len in current_experiment_flip:
-            ones+=1
-        if "0"*streak_len in current_experiment_flip:
-            zeroes+=1
-    return zeroes/100, ones/100
+        if "1" * streak_len in current_experiment_flip:
+            ones += 1
+        if "0" * streak_len in current_experiment_flip:
+            zeroes += 1
+    return zeroes / 100, ones / 100
+
 
 def generate_flips(count_of_flips):
     return [random.randint(0, 1) for _ in range(count_of_flips)]
@@ -106,4 +110,4 @@ def generate_flips(count_of_flips):
 if __name__ == "__main__":
     """[summary]"""
     print(comma_code(["apples", "bananas", "tofu", "cats"]))
-    print(coin_flip_streaks(10_000,6))
+    print(coin_flip_streaks(10_000, 6))
